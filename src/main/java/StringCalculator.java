@@ -1,8 +1,6 @@
-public class StringCalculator {
+import static java.lang.Integer.parseInt;
 
-    // "" -> 0
-    // "0" -> 0 (int)
-    // "1" -> 1 (int)
+public class StringCalculator {
     // "1,2" -> 3 (int)
     // "1,2,3" -> 6 (int)
     // "1\n2" -> 3 (int)
@@ -13,7 +11,6 @@ public class StringCalculator {
         if (numbers.length() == 0) {
             return 0;
         }
-
-        return -1;
+        return parseInt(numbers);
     }
 }
