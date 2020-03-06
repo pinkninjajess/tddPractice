@@ -11,6 +11,12 @@ public class StringCalculator {
         if (numbers.length() == 0) {
             return 0;
         }
-        return parseInt(numbers);
+
+        int sum = 0;
+        String[] numbersArray = numbers.split(",");
+        for (String s : numbersArray) {
+            sum += parseInt(s);
+        }
+        return sum;
     }
 }

@@ -13,8 +13,12 @@ public class StringCalculatorTest {
 
     @Test
     public void add_singleNumber_ReturnsSame() {
-        assertEquals(0, stringCalculator.add("0"));
         assertEquals(10, stringCalculator.add("10"));
+    }
+
+    @Test
+    public void add_commaSeparatedValues_ReturnsSum() {
+        assertEquals(26, stringCalculator.add("1,20,5"));
     }
 
 }
