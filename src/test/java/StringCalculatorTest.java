@@ -21,4 +21,14 @@ public class StringCalculatorTest {
         assertEquals(26, stringCalculator.add("1,20,5"));
     }
 
+    @Test
+    public void add_numbersWithNewLine_ReturnsSum() {
+        assertEquals(20, stringCalculator.add("15\n5"));
+    }
+
+    @Test
+    public void add_numbersWithCommaAndNewLine_ReturnSum() {
+        assertEquals(10, stringCalculator.add("2\n7,1"));
+    }
+
 }
