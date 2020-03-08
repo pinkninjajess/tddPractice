@@ -11,7 +11,7 @@ public class StringCalculator {
         }
 
         return Arrays.stream(numbers.split(
-                "[,\n]"))
+                "[,\n/;]"))
                 .filter((s) -> s.matches("\\d+"))
                 .mapToInt(Integer::valueOf)
                 .reduce(0, Integer::sum);
