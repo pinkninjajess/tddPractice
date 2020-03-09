@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class StringCalculator {
 
@@ -10,10 +11,18 @@ public class StringCalculator {
             return 0;
         }
 
-        return Arrays.stream(numbers.split(
-                "[,\n/;]"))
+        String delimiter = "";
+
+        if (numbers.startsWith("//")) {
+            delimiter = numbers.substring(2, 3);
+        }
+
+        String regex = "[" + delimiter + ",\n]";
+
+        Stream<String> streamNumbers = Arrays.stream(numbers.split(regex));
+        return streamNumbers
                 .filter((s) -> s.matches("\\d+"))
-                .mapToInt(Integer::valueOf)
-                .reduce(0, Integer::sum);
+                .mapToInt(Integer::parseInt)
+                .sum();
     }
 }
