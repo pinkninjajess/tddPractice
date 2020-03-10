@@ -33,9 +33,14 @@ public class StringCalculatorTest {
 
     // "//;1,2;3\n4" -> 10
     @Test
-    public void add_numbersWithSemiColonDelimiterAndOtherDelimiters_ReturnsSum() {
+    public void add_numbersWithCustomDelimiter_ReturnsSum() {
         assertEquals(10, stringCalculator.add("//;1,2;3\n4"));
         assertEquals(20, stringCalculator.add("//.1,2.3\n14"));
+    }
+
+    @Test
+    public void add_numbersWithCustomDelimiterAnyLength_ReturnsSum() {
+        assertEquals(20, stringCalculator.add("//[;;;]1,2;;;3\n14"));
     }
 
 
