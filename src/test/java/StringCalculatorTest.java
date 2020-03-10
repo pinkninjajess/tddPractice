@@ -31,7 +31,6 @@ public class StringCalculatorTest {
         assertEquals(10, stringCalculator.add("2\n7,1"));
     }
 
-    // "//;1,2;3\n4" -> 10
     @Test
     public void add_numbersWithCustomDelimiter_ReturnsSum() {
         assertEquals(10, stringCalculator.add("//;1,2;3\n4"));
@@ -42,6 +41,7 @@ public class StringCalculatorTest {
     public void add_numbersWithCustomDelimiterAnyLength_ReturnsSum() {
         assertEquals(20, stringCalculator.add("//[;;;]1,2;;;3\n14"));
         assertEquals(24, stringCalculator.add("//[!!!!]1,2!!!!3!!!!4\n14"));
+        assertEquals(24, stringCalculator.add("//[.]1,2.3.4\n14"));
     }
 
 
