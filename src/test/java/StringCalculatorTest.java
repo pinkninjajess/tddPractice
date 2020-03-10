@@ -41,6 +41,7 @@ public class StringCalculatorTest {
     @Test
     public void add_numbersWithCustomDelimiterAnyLength_ReturnsSum() {
         assertEquals(20, stringCalculator.add("//[;;;]1,2;;;3\n14"));
+        assertEquals(24, stringCalculator.add("//[!!!!]1,2!!!!3!!!!4\n14"));
     }
 
 
