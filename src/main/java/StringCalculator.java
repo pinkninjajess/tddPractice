@@ -1,8 +1,10 @@
 import java.util.Arrays;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
+
+    public static final String CUSTOM_VARIABLE_LENGTH_DELIMITERS = "//[";
+    public static final String CUSTOM_FIXED_LENGTH_DELIMITER = "//";
 
     public int add(String numbers) {
         if (numbers.length() == 0) {
@@ -14,30 +16,27 @@ public class StringCalculator {
                 .sum();
     }
 
-    private String getDelimitersOf(String numbers) {
-        return ",|\\n" + getCustomDelimiter(numbers);
-    }
-
     private String removeDelimitersFrom(String numbers) {
-        if (numbers.startsWith("//[")) {
-            String[] parts = numbers.split("//\\[(.*?)]", 2);
-            return parts[1];
+        if (numbers.startsWith(CUSTOM_VARIABLE_LENGTH_DELIMITERS)) {
+            return numbers.split("]")[1];
         }
-        if (numbers.startsWith("//")) {
+        if (numbers.startsWith(CUSTOM_FIXED_LENGTH_DELIMITER)) {
             return numbers.substring(3);
         }
         return numbers;
     }
 
+    private String getDelimitersOf(String numbers) {
+        return ",|\\n" + getCustomDelimiter(numbers);
+    }
+
     private String getCustomDelimiter(String numbers) {
-        if (numbers.startsWith("//[")) {
-            Pattern p = Pattern.compile("//\\[(.*?)]");
-            Matcher m = p.matcher(numbers);
-            if (m.find()) {
-                return "|" + "(" + Pattern.quote(m.group(1)) + ")";
-            }
-        } else if (numbers.startsWith("//")) {
-            return "|" + Pattern.quote(numbers.substring(2, 3));
+        if (numbers.startsWith(CUSTOM_VARIABLE_LENGTH_DELIMITERS)) {
+            String customDelimiter = numbers.split("\\[")[1].split("]")[0];
+            return "|" + Pattern.quote(customDelimiter);
+        } else if (numbers.startsWith(CUSTOM_FIXED_LENGTH_DELIMITER)) {
+            String customDelimiter = numbers.substring(2, 3);
+            return "|" + Pattern.quote(customDelimiter);
         }
         return "";
     }
