@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
@@ -27,18 +29,22 @@ public class StringCalculator {
     }
 
     private String getDelimitersOf(String numbers) {
-        return ",|\\n" + getCustomDelimiter(numbers);
+        List<String> delimitersList = new ArrayList<>();
+        delimitersList.add("\\n");
+        delimitersList.add(",");
+        delimitersList.add(getCustomDelimiter(numbers));
+        String join = String.join("|", delimitersList);
+        return String.join("|", delimitersList);
     }
 
     private String getCustomDelimiter(String numbers) {
         if (numbers.startsWith(CUSTOM_VARIABLE_LENGTH_DELIMITERS)) {
             String customDelimiter = numbers.split("\\[")[1].split("]")[0];
-            return "|" + Pattern.quote(customDelimiter);
+            return Pattern.quote(customDelimiter);
         } else if (numbers.startsWith(CUSTOM_FIXED_LENGTH_DELIMITER)) {
             String customDelimiter = numbers.substring(2, 3);
-            return "|" + Pattern.quote(customDelimiter);
+            return Pattern.quote(customDelimiter);
         }
-        return "";
+        return null;
     }
-
 }
